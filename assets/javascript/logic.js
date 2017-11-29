@@ -1,10 +1,10 @@
 
-
 $(document).ready(function() {
-var gameStatus=false;
 var number=0;
 var userGuess=0;
 var itemNum=[];
+var wins=0;
+var loses=0;
 
 
 //game settings
@@ -12,8 +12,9 @@ var itemNum=[];
 var itemNummin=1;
 var itemNummax=12;
 //Number generator
-var numMax=120;
-var numMin=19;
+var numMax=120; // for calculation for max number
+var numMin=19;  //for calculation for min number.
+var numButtons=4; //number of buttons
 
 
 
@@ -25,32 +26,66 @@ function reset() {
     userGuess=0;
     //creates elements and reset buttons.
      $("#buttons").empty();
-  	while(itemNum.length < 4){
+  	while(itemNum.length < numButtons){
     var numGen=Math.floor(Math.random()*(itemNummax)+itemNummin);
   	if(itemNum.indexOf(numGen) === -1){
     itemNum.push(numGen);
     var NumBtn = $("<button>");
-    NumBtn.addClass("btn btn-primary buttons");
-    NumBtn.attr("data", numGen);
+    NumBtn.addClass("btn btn-primary number");
+    NumBtn.attr('value', numGen);
     NumBtn.text("???");
     $("#buttons").append(NumBtn);
     }
   	console.log(itemNum);
-    gameStatus=true;
+
   	}
 
-
-}
-    console.log("HI");
-
- $(".buttons").on("click", function() {
-    console.log("HI");
+    buttonClick();
+  }
 
 
-});
+
 
 
 reset();
+
+
+function buttonClick() {
+
+$(".number").on("click", function() {
+    var x= parseInt(this.value);
+    console.log(x);
+    game(x); 
+  })
+}
+
+function game(x){
+
+
+  userGuess += x;
+  $("#userGuess").html(userGuess);
+  console.log(userGuess);
+  if(userGuess===number){
+  wins++
+    $("#wins").html(wins);
+    console.log("Your "+userGuess+" matches "+number);
+  reset();
+  }
+  else if(userGuess>number){
+    loses++;
+    $("#loses").html(loses);
+    console.log("Your "+userGuess+" exceeds "+number);
+   reset();
+  }
+
+
+}
+
+
+
+
 });
+
+
 
 
