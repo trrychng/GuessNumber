@@ -11,8 +11,8 @@ var loses=0; //declaring values
 //random number number generator for buttons
 var itemNummin=1; //controls number min generator on button
 var itemNummax=12; //control number max generator on button
-var numButtons=4; //number of buttons
-//Number generator
+var numButtons=4; //number of buttons on page.
+//Number generator between numMin And numMax
 var numMax=120; // for calculation for max number
 var numMin=19;  //for calculation for min number.
 
@@ -23,6 +23,7 @@ function reset() {
   	$("#Number").text(number); //update html page with number
   	itemNum=[]; //clears itemNum array
     userGuess=0; //clears userGuess on reset
+    $("#userGuess").html(userGuess); //update html
     //creates elements and reset buttons.
      $("#buttons").empty(); //clear board on html
   	while(itemNum.length < numButtons){  //creates #'s of button based on numButtons
