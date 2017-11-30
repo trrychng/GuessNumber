@@ -18,27 +18,26 @@ var numMin=19;  //for calculation for min number.
 
 
 function reset() {
-    //generates number for game.
-  	number = Math.floor(Math.random()*(numMax-numMin+1)+numMin); //generates number between paremeters of min and max
-  	$("#Number").text(number); //update html page with number
-  	itemNum=[]; //clears itemNum array
-    userGuess=0; //clears userGuess on reset
-    $("#userGuess").html(userGuess); //update html
-    //creates elements and reset buttons.
-     $("#buttons").empty(); //clear board on html
-  	while(itemNum.length < numButtons){  //creates #'s of button based on numButtons
-    var numGen=Math.floor(Math.random()*(itemNummax)+itemNummin); //creates value between min and max
-  	if(itemNum.indexOf(numGen) === -1){ //ensures no duplicate
+  //generates number for game.
+  number = Math.floor(Math.random()*(numMax-numMin+1)+numMin); //generates number between paremeters of min and max
+  $("#Number").text(number); //update html page with number
+  itemNum=[]; //clears itemNum array
+  userGuess=0; //clears userGuess on reset
+  $("#userGuess").html(userGuess); //update html
+  //creates elements and reset buttons.
+  $("#buttons").empty(); //clear board on html
+  while(itemNum.length < numButtons){  //creates #'s of button based on numButtons
+  var numGen=Math.floor(Math.random()*(itemNummax)+itemNummin); //creates value between min and max
+  if(itemNum.indexOf(numGen) === -1){ //ensures no duplicate
     itemNum.push(numGen); //start pushing to array
     var NumBtn = $("<button>");  // creates div 
     NumBtn.addClass("btn btn-primary number"); // add class
     NumBtn.attr('value', numGen); // adds values
     NumBtn.text("???"); // text  for button
-    $("#buttons").append(NumBtn); //appends to div buttons
-    }
-  	console.log(itemNum); //logging
-
-  	}
+  $("#buttons").append(NumBtn); //appends to div buttons
+   }
+  console.log(itemNum); //logging
+}
 
     buttonClick(); //require for remapping
   }
@@ -57,16 +56,18 @@ function game(x){
   userGuess += x; //add value 
   $("#userGuess").html(userGuess); //update html
   console.log(userGuess); //logging
-  if(userGuess===number){ //if user Sum matches number is a winner
+  if(userGuess===number){ //if userGuess matches number then win
   wins++ //updates win
     $("#wins").html(wins); //updates win score on site.
-    console.log("YOU WIN!!! Your "+userGuess+" matches "+number); //logging
+    console.log("YOU WIN!!! Your number "+userGuess+" matches "+number); //logging
+    $("#message").html("YOU WIN!!! Your "+userGuess+" matches "+number);
   reset(); //resets game after win
   }
-  else if(userGuess>number){ //if usersum exceeds number then lose
+  else if(userGuess>number){ //if userGuess exceeds number then lose
     loses++; //update lose score
     $("#loses").html(loses); //update html
     console.log("YOU LOSE!!! Your "+userGuess+" exceeds "+number); //logging
+    $("#message").html("YOU LOSE!!! Your number "+userGuess+" exceeds "+number);
    reset(); //reset game
   }
 
